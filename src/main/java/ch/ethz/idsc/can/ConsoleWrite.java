@@ -1,10 +1,11 @@
 // code by ma
 package ch.ethz.idsc.can;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 
 class ConsoleWrite extends Thread {
-  public PrintWriter comportOut = null;
+  private PrintWriter comportOut = null;
   public int data0 = 0;
   public int data1 = 0;
 
@@ -25,8 +26,6 @@ class ConsoleWrite extends Thread {
         e.printStackTrace();
       }
       comportOut.println("[100] write pdo 1 2 0 2");
-      // comportOut.println("[101] write pdo 1 2 " + data0 + " " + data1);
-      // System.out.println("sent PDO" );
     }
   }
 }

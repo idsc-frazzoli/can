@@ -5,19 +5,19 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 class ConsoleCtrl extends Thread {
-  public BufferedReader comportIn = null;
+  private BufferedReader comportIn = null;
   public String PDO1 = null;
   public String PDO2 = null;
 
   ConsoleCtrl(BufferedReader in) {
     comportIn = in;
   }
-
+  boolean run = true;
   public void run() {
     System.out.println("Running thread read");
-    Boolean run = true;
+    
     while (run) {
-      String line = "";
+      String line = null;
       try {
         line = comportIn.readLine();
       } catch (IOException e) {
@@ -35,7 +35,7 @@ class ConsoleCtrl extends Thread {
           PDO1 = line;
           char temp = line.charAt(8); // read knob state
           if ((temp == '1')) {
-            // System.out.println("E-STOP");
+             //System.out.println("E-STOP");
           }
           if ((temp == '2')) {
             System.out.println("STOP");
@@ -62,5 +62,9 @@ class ConsoleCtrl extends Thread {
         System.out.println(line);
       }
     }
+  }
+  public void close() throws IOException {
+	  run = false;
+	  comportIn.close();
   }
 }
